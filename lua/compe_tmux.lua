@@ -5,11 +5,11 @@
 --
 
 local compe = require'compe'
-local compe_config = require'compe.config'
 
 --
 -- Tmux implementation
 --
+
 local Tmux = {}
 
 function Tmux.new()
@@ -41,7 +41,7 @@ function Tmux.get_panes(self, current_pane)
     return result
 end
 
-function Tmux.get_data(self, pane)
+function Tmux.get_pane_data(self, pane)
     local h = nil
     if io.popen('tmux capture-pane -p') == nil then
         h = io.popen('tmux capture-pane -t {} ' .. pane .. ' && tmux show-buffer && tmux delete-buffer')
@@ -56,21 +56,12 @@ function Tmux.get_data(self, pane)
     return nil
 end
 
-function Tmux.get_completion_items(self, input)
-    if not self:is_enabled() then
-        return nil
-    end
-
-    local current_pane = self:get_current_pane()
-    if not current_pane then
-        return nil
-    end
-
+function Tmux.get_completion_items(self, current_pane, input)
     local panes = self:get_panes(current_pane)
     local result = {}
 
     for _, p in ipairs(panes) do
-        local data = self:get_data(p)
+        local data = self:get_pane_data(p)
         if data ~= nil then
             for word in string.gmatch(data, '[%w_]+') do
                 if vim.startswith(word:lower(), input:lower()) then
@@ -85,9 +76,23 @@ function Tmux.get_completion_items(self, input)
     return result
 end
 
+function Tmux.complete(self, input)
+    if not self:is_enabled() then
+        return nil
+    end
+
+    local current_pane = self:get_current_pane()
+    if not current_pane then
+        return nil
+    end
+
+    return self:get_completion_items(current_pane, input)
+end
+
 --
 -- Compe implementation
 --
+
 local Source = {}
 
 function Source.new()
@@ -109,7 +114,7 @@ function Source.determine(self, context)
 end
 
 function Source.complete(self, args)
-    local items = self.tmux:get_completion_items(args.input)
+    local items = self.tmux:complete(args.input)
     if items == nil then
         return args.abort()
     end
