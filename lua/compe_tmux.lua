@@ -58,7 +58,7 @@ end
 
 function Tmux.get_completion_items(self, input)
     if not self:is_enabled() then
-        return args.abort()
+        return nil
     end
 
     local current_pane = self:get_current_pane()
