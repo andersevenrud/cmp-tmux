@@ -66,7 +66,7 @@ function Tmux.get_completion_items(self, current_pane, input)
             for word in string.gmatch(data, '[%w_:/.%-~]+') do
                 if word:lower():match(input:lower()) then
                     table.insert(result, {
-                        word = word:gsub('%.$', '')
+                        word = word:gsub('[:.]+$', '')
                     })
                 end
             end
