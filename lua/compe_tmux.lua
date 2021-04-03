@@ -59,15 +59,24 @@ end
 function Tmux.get_completion_items(self, current_pane, input)
     local panes = self:get_panes(current_pane)
     local result = {}
+    local input_lower = input:lower()
 
     for _, p in ipairs(panes) do
         local data = self:get_pane_data(p)
         if data ~= nil then
-            for word in string.gmatch(data, '[%w_:/.%-~]+') do
-                if word:lower():match(input:lower()) then
+            for word in string.gmatch(data, '[%w%d_:/.%-~]+') do
+                local word_lower = word:lower()
+
+                if word_lower:match(input_lower) then
                     table.insert(result, {
                         word = word:gsub('[:.]+$', '')
                     })
+
+                    for sub_word in string.gmatch(word, '[%w%d]+') do
+                        table.insert(result, {
+                            word = sub_word
+                        })
+                    end
                 end
             end
         end
