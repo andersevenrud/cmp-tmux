@@ -63,10 +63,10 @@ function Tmux.get_completion_items(self, current_pane, input)
     for _, p in ipairs(panes) do
         local data = self:get_pane_data(p)
         if data ~= nil then
-            for word in string.gmatch(data, '[%w_]+') do
-                if vim.startswith(word:lower(), input:lower()) then
+            for word in string.gmatch(data, '[%w_:/.%-~]+') do
+                if word:lower():match(input:lower()) then
                     table.insert(result, {
-                        word = word
+                        word = word:gsub('%.$', '')
                     })
                 end
             end
