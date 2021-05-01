@@ -9,6 +9,24 @@ local compe = require'compe'
 local compe_config = require'compe.config'
 
 --
+-- Utils
+--
+
+function read_command(cmd)
+    local h = io.popen(cmd)
+
+    if h ~= nil then
+        local data = h:read('*all')
+
+        h:close()
+
+        return data
+    end
+
+    return nil
+end
+
+--
 -- Tmux implementation
 --
 
@@ -38,10 +56,8 @@ function Tmux.get_panes(self, current_pane)
         cmd = cmd .. ' -a'
     end
 
-    local h = io.popen(cmd)
-    if h ~= nil then
-        local data = h:read('*all')
-
+    local data = read_command(cmd)
+    if data ~= nil then
         for p in string.gmatch(data, '%%%d+') do
             if current_pane ~= p then
                 table.insert(result, p)
@@ -53,13 +69,7 @@ function Tmux.get_panes(self, current_pane)
 end
 
 function Tmux.get_pane_data(self, pane)
-    local h = io.popen('tmux capture-pane -p -t ' .. pane)
-
-    if h ~= nil then
-        return h:read('*all')
-    end
-
-    return nil
+    return read_command('tmux capture-pane -p -t ' .. pane)
 end
 
 function Tmux.get_completion_items(self, current_pane, input)
