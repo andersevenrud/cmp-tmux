@@ -2,7 +2,7 @@
 
 Tmux completion source for [nvim-compe](https://github.com/hrsh7th/nvim-compe).
 
-Sources words from adjacent tmux panes.
+Sources words from (adjacent) tmux panes.
 
 ## Requirements
 
