@@ -12,10 +12,22 @@ Sources words from adjacent tmux panes.
 
 ## Installation
 
+Use your package manager of choice. Examples:
+
 ```vim
+" dein
+dein#add('andersevenrud/compe-tmux')
+
+" plug
 Plug 'andersevenrud/compe-tmux'
 
-lua << EOF
+" Packer
+use { 'andersevenrud/compe-tmux' }
+```
+
+Then update your compe settings:
+
+```lua
 require'compe'.setup {
   -- ...
   source = {
@@ -23,32 +35,40 @@ require'compe'.setup {
     tmux = true,
   }
 }
-EOF
+```
+
+Or using vimL:
+
+```vim
+let g:compe.source = {}
+let g:compe.source.tmux = v:true
 ```
 
 ## Configuration
 
 To configure options provided by this plugin, change your compe source to the following:
 
-```vim
-lua << EOF
+```lua
 require'compe'.setup {
   source = {
     tmux = {
-      -- Options goes here
+      -- option = value
     }
   }
 }
-EOF
+```
+
+Or using vimL:
+
+```vim
+let g:compe.source = {}
+let g:compe.source.tmux = {}
+"let g:compe.source.tmux.option = value
 ```
 
 Available options:
 
-* `all_panes = true` - Uses all panes as sources, not just the adjacent
-
-## Credit
-
-* [completion-tmux](https://github.com/albertoCaroM/completion-tmux)
+* `all_panes` - Uses all panes as sources, not just the adjacent (default: **false**)
 
 ## License
 
