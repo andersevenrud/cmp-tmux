@@ -14,11 +14,11 @@ local compe_config = require'compe.config'
 local Tmux = {}
 
 function Tmux.new(config)
-  local self = setmetatable({}, { __index = Tmux })
-  self.has_tmux = vim.fn.executable('tmux')
-  self.is_tmux = os.getenv('TMUX')
-  self.config = config
-  return self
+    local self = setmetatable({}, { __index = Tmux })
+    self.has_tmux = vim.fn.executable('tmux')
+    self.is_tmux = os.getenv('TMUX')
+    self.config = config
+    return self
 end
 
 function Tmux.is_enabled(self)
@@ -122,15 +122,15 @@ function Source.new()
 end
 
 function Source.get_metadata(self)
-  return {
-    priority = 100,
-    dup = 0,
-    menu = '[tmux]'
-  }
+    return {
+        priority = 100,
+        dup = 0,
+        menu = '[tmux]'
+    }
 end
 
 function Source.determine(self, context)
-  return compe.helper.determine(context)
+    return compe.helper.determine(context)
 end
 
 function Source.complete(self, args)
