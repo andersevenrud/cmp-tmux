@@ -15,7 +15,6 @@ Sources words from adjacent tmux panes.
 ```vim
 Plug 'andersevenrud/compe-tmux'
 
-
 lua << EOF
 require'compe'.setup {
   -- ...
@@ -26,6 +25,26 @@ require'compe'.setup {
 }
 EOF
 ```
+
+## Configuration
+
+To configure options provided by this plugin, change your compe source to the following:
+
+```vim
+lua << EOF
+require'compe'.setup {
+  source = {
+    tmux = {
+      -- Options goes here
+    }
+  }
+}
+EOF
+```
+
+Available options:
+
+* `all_panes = true` - Uses all panes as sources, not just the adjacent
 
 ## Credit
 

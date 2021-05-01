@@ -5,6 +5,7 @@
 --
 
 local compe = require'compe'
+local compe_config = require'compe.config'
 
 --
 -- Tmux implementation
@@ -12,10 +13,11 @@ local compe = require'compe'
 
 local Tmux = {}
 
-function Tmux.new()
+function Tmux.new(config)
   local self = setmetatable({}, { __index = Tmux })
   self.has_tmux = vim.fn.executable('tmux')
   self.is_tmux = os.getenv('TMUX')
+  self.config = config
   return self
 end
 
@@ -28,7 +30,12 @@ function Tmux.get_current_pane()
 end
 
 function Tmux.get_panes(self, current_pane)
-    local h = io.popen('tmux list-panes $LISTARGS -F \'#{pane_active}#{window_active}-#{session_id} #{pane_id}\'')
+    local cmd = 'tmux list-panes -F \'#{pane_id}\''
+    if self.config.all_panes then
+        cmd = cmd .. ' -a'
+    end
+
+    local h = io.popen(cmd)
     local data = h:read('*all')
     local result = {}
 
@@ -105,9 +112,13 @@ end
 local Source = {}
 
 function Source.new()
-  local self = setmetatable({}, { __index = Source })
-  self.tmux = Tmux.new()
-  return self
+    local c = compe_config.get()
+    local all_panes = c.source.tmux.all_panes and c.source.tmux.all_panes or false
+    local self = setmetatable({}, { __index = Source })
+    self.tmux = Tmux.new({
+        all_panes = all_panes
+    })
+    return self
 end
 
 function Source.get_metadata(self)
