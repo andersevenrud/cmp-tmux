@@ -49,12 +49,7 @@ function Tmux.get_panes(self, current_pane)
 end
 
 function Tmux.get_pane_data(self, pane)
-    local h = nil
-    if io.popen('tmux capture-pane -p') == nil then
-        h = io.popen('tmux capture-pane -t {} ' .. pane .. ' && tmux show-buffer && tmux delete-buffer')
-    else
-        h = io.popen('tmux capture-pane -p -t ' .. pane)
-    end
+    local h = io.popen('tmux capture-pane -p -t ' .. pane)
 
     if h ~= nil then
         return h:read('*all')
