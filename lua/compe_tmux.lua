@@ -4,6 +4,7 @@
 -- license: MIT
 --
 
+local vim = vim
 local compe = require'compe'
 local compe_config = require'compe.config'
 
@@ -30,18 +31,21 @@ function Tmux.get_current_pane()
 end
 
 function Tmux.get_panes(self, current_pane)
+    local result = {}
+
     local cmd = 'tmux list-panes -F \'#{pane_id}\''
     if self.config.all_panes then
         cmd = cmd .. ' -a'
     end
 
     local h = io.popen(cmd)
-    local data = h:read('*all')
-    local result = {}
+    if h ~= nil then
+        local data = h:read('*all')
 
-    for p in string.gmatch(data, '%%%d+') do
-        if current_pane ~= p then
-            table.insert(result, p)
+        for p in string.gmatch(data, '%%%d+') do
+            if current_pane ~= p then
+                table.insert(result, p)
+            end
         end
     end
 
