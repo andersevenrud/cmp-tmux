@@ -80,6 +80,7 @@ function Tmux.get_completion_items(self, current_pane, input)
     for _, p in ipairs(panes) do
         local data = self:get_pane_data(p)
         if data ~= nil then
+            -- match not only full words, but urls, paths, etc.
             for word in string.gmatch(data, '[%w%d_:/.%-~]+') do
                 local word_lower = word:lower()
 
@@ -88,6 +89,7 @@ function Tmux.get_completion_items(self, current_pane, input)
                         word = word:gsub('[:.]+$', '')
                     })
 
+                    -- but also isolate the words from the result
                     for sub_word in string.gmatch(word, '[%w%d]+') do
                         table.insert(result, {
                             word = sub_word
