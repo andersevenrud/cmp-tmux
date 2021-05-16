@@ -2,7 +2,8 @@
 
 Tmux completion source for [nvim-compe](https://github.com/hrsh7th/nvim-compe).
 
-Sources words from (adjacent) tmux panes.
+*By default this extension uses adjacent panes as sources. See [configuration](#configuration)
+to enable all panes.*
 
 ## Requirements
 
