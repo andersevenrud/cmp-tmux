@@ -124,7 +124,8 @@ local Source = {}
 
 function Source.new()
     local c = compe_config.get()
-    local all_panes = c.source.tmux.all_panes == true
+    local source = c.source.tmux and c.source.tmux or {}
+    local all_panes = source.all_panes == true
     local self = setmetatable({}, { __index = Source })
     self.tmux = Tmux.new({
         all_panes = all_panes
