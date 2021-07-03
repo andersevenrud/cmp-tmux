@@ -26,34 +26,36 @@ Plug 'andersevenrud/compe-tmux'
 use { 'andersevenrud/compe-tmux' }
 ```
 
-Then update your compe settings:
+## Setup
+
+Using Lua:
 
 ```lua
 require'compe'.setup {
-  -- ...
   source = {
-    -- ...
     tmux = true,
   }
 }
 ```
 
-Or using vimL:
+Or vimL:
 
 ```vim
-let g:compe.source = {}
 let g:compe.source.tmux = v:true
 ```
 
 ## Configuration
 
-To configure options provided by this plugin, change your compe source to the following:
+To configure this extension, change the `tmux` compe source definition as defined below (defaults shown).
+
+Using Lua:
 
 ```lua
 require'compe'.setup {
   source = {
     tmux = {
-      -- option = value
+      disabled = false,
+      all_panes = false
     }
   }
 }
@@ -62,14 +64,10 @@ require'compe'.setup {
 Or using vimL:
 
 ```vim
-let g:compe.source = {}
 let g:compe.source.tmux = {}
-"let g:compe.source.tmux.option = value
+let g:compe.source.tmux.disabled = v:false
+let g:compe.source.tmux.all_panes = v:false
 ```
-
-Available options:
-
-* `all_panes` - Uses all panes as sources, not just the adjacent (default: **false**)
 
 ## License
 
