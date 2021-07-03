@@ -123,8 +123,13 @@ end
 local Source = {}
 
 function Source.new()
+    local source = {}
     local c = compe_config.get()
-    local source = c.source.tmux and c.source.tmux or {}
+
+    if c ~= nil then
+        source = c.source.tmux and c.source.tmux or {}
+    end
+
     local all_panes = source.all_panes == true
     local self = setmetatable({}, { __index = Source })
     self.tmux = Tmux.new({
