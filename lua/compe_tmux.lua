@@ -86,13 +86,15 @@ function Tmux.get_completion_items(self, current_pane, input)
 
                 if word_lower:match(input_lower) then
                     table.insert(result, {
-                        word = word:gsub('[:.]+$', '')
+                        word = word:gsub('[:.]+$', ''),
+                        kind = 'Text',
                     })
 
                     -- but also isolate the words from the result
                     for sub_word in string.gmatch(word, '[%w%d]+') do
                         table.insert(result, {
-                            word = sub_word
+                            word = sub_word,
+                            kind = 'Text',
                         })
                     end
                 end
