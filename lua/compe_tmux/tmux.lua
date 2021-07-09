@@ -1,35 +1,11 @@
 --
 -- compe-tmux
+-- url: https://github.com/andersevenrud/compe-tmux
 -- author: andersevenrud@gmail.com
 -- license: MIT
 --
 
-local vim = vim
-local compe = require'compe'
-local compe_config = require'compe.config'
-
---
--- Utils
---
-
-function read_command(cmd)
-    local h = io.popen(cmd)
-
-    if h ~= nil then
-        local data = h:read('*all')
-
-        h:close()
-
-        return data
-    end
-
-    return nil
-end
-
---
--- Tmux implementation
---
-
+local utils = require'compe_tmux.utils'
 local Tmux = {}
 
 function Tmux.new(config)
@@ -56,7 +32,7 @@ function Tmux.get_panes(self, current_pane)
         cmd = cmd .. ' -a'
     end
 
-    local data = read_command(cmd)
+    local data = utils.read_command(cmd)
     if data ~= nil then
         for p in string.gmatch(data, '%%%d+') do
             if current_pane ~= p then
@@ -69,7 +45,7 @@ function Tmux.get_panes(self, current_pane)
 end
 
 function Tmux.get_pane_data(self, pane)
-    return read_command('tmux capture-pane -p -t ' .. pane)
+    return utils.read_command('tmux capture-pane -p -t ' .. pane)
 end
 
 function Tmux.get_completion_items(self, current_pane, input)
@@ -118,50 +94,4 @@ function Tmux.complete(self, input)
     return self:get_completion_items(current_pane, input)
 end
 
---
--- Compe implementation
---
-
-local Source = {}
-
-function Source.new()
-    local source = {}
-    local c = compe_config.get()
-
-    if c ~= nil then
-        source = c.source.tmux and c.source.tmux or {}
-    end
-
-    local all_panes = source.all_panes == true
-    local self = setmetatable({}, { __index = Source })
-    self.tmux = Tmux.new({
-        all_panes = all_panes
-    })
-    return self
-end
-
-function Source.get_metadata(self)
-    return {
-        priority = 100,
-        dup = 0,
-        menu = '[tmux]'
-    }
-end
-
-function Source.determine(self, context)
-    return compe.helper.determine(context)
-end
-
-function Source.complete(self, args)
-    local items = self.tmux:complete(args.input)
-    if items == nil then
-        return args.abort()
-    end
-
-    args.callback({
-        incomplete = true,
-        items = items
-    })
-end
-
-return Source.new()
+return Tmux
