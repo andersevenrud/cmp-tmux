@@ -19,10 +19,11 @@ function Source.new()
         source = c.source.tmux and c.source.tmux or {}
     end
 
-    local all_panes = source.all_panes == true
     local self = setmetatable({}, { __index = Source })
+
     self.tmux = Tmux.new({
-        all_panes = all_panes
+        all_panes = source.all_panes == true,
+        kind = source.kind or 'Text'
     })
     return self
 end

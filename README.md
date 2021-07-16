@@ -55,7 +55,8 @@ require'compe'.setup {
   source = {
     tmux = {
       disabled = false,
-      all_panes = false
+      all_panes = false,
+      kind = 'Text',
     }
   }
 }
@@ -67,6 +68,7 @@ Or using vimL:
 let g:compe.source.tmux = {}
 let g:compe.source.tmux.disabled = v:false
 let g:compe.source.tmux.all_panes = v:false
+let g:compe.source.tmux.kind = "Text"
 ```
 
 ## License
