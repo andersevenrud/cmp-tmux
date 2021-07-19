@@ -13,17 +13,10 @@ to enable all panes.*
 
 ## Installation
 
-Use your package manager of choice. Examples:
+Use your package manager of choice. For example [packer.nvim](https://github.com/wbthomason/packer.nvim):
 
 ```vim
-" dein
-dein#add('andersevenrud/compe-tmux')
-
-" plug
-Plug 'andersevenrud/compe-tmux'
-
-" Packer
-use { 'andersevenrud/compe-tmux' }
+use 'andersevenrud/compe-tmux'
 ```
 
 ## Setup
