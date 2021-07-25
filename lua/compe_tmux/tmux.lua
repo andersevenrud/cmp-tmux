@@ -10,8 +10,8 @@ local Tmux = {}
 
 function Tmux.new(config)
     local self = setmetatable({}, { __index = Tmux })
-    self.has_tmux = vim.fn.executable('tmux')
-    self.is_tmux = os.getenv('TMUX')
+    self.has_tmux = vim.fn.executable('tmux') == 1
+    self.is_tmux = os.getenv('TMUX') ~= nil
     self.config = config
     return self
 end
