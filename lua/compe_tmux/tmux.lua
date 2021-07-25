@@ -1,7 +1,7 @@
 --
 -- compe-tmux
 -- url: https://github.com/andersevenrud/compe-tmux
--- author: andersevenrud@gmail.com
+-- author: Anders Evenrud <andersevenrud@gmail.com>
 -- license: MIT
 --
 
