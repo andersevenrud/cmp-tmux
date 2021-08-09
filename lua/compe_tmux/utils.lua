@@ -26,8 +26,8 @@ Utils.create_compe_config = function()
     local source = {}
     local c = compe_config.get()
 
-    if c ~= nil then
-        source = c.source.tmux and c.source.tmux or {}
+    if type(c) == 'table' and type(c.source) == 'table' then
+        source = c.source.tmux or {}
     end
 
     return vim.tbl_extend('force', {
