@@ -31,7 +31,7 @@ require'compe'.setup {
 }
 ```
 
-Or vimL:
+Or Vimscript:
 
 ```vim
 let g:compe.source.tmux = v:true
@@ -55,7 +55,7 @@ require'compe'.setup {
 }
 ```
 
-Or using vimL:
+Or using Vimscript:
 
 ```vim
 let g:compe.source.tmux = {}
