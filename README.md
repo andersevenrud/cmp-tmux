@@ -36,7 +36,7 @@ require'cmp'.setup {
 
 ## Configuration
 
-To configure this extension, change the `tmux` compe source definition as defined below (defaults shown).
+To configure this extension, add an options table (defaults shown):
 
 ```lua
 require'compe'.setup {
