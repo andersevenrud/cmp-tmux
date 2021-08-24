@@ -1,8 +1,6 @@
-if exists('g:loaded_compe_tmux')
+if exists('g:loaded_cmp_tmux')
   finish
 endif
-let g:loaded_compe_tmux = v:true
+let g:loaded_cmp_tmux = v:true
 
-if exists('g:loaded_compe')
-  lua require'compe'.register_source('tmux', require'compe_tmux')
-endif
+lua require'cmp'.register_source('tmux', require'compe_tmux')

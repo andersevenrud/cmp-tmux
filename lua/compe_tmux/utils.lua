@@ -6,7 +6,11 @@
 --
 
 local Utils = {}
-local compe_config = require'compe.config'
+local config = require'cmp.config'
+
+local default_config = {
+    all_panes = false,
+}
 
 Utils.read_command = function(cmd)
     local h = io.popen(cmd)
@@ -23,17 +27,8 @@ Utils.read_command = function(cmd)
 end
 
 Utils.create_compe_config = function()
-    local source = {}
-    local c = compe_config.get()
-
-    if type(c) == 'table' and type(c.source) == 'table' then
-        source = c.source.tmux or {}
-    end
-
-    return vim.tbl_extend('force', {
-        all_panes = false,
-        kind = 'Text'
-    }, source)
+    local source = config.get_source_option('tmux') or {}
+    return vim.tbl_extend('force', default_config, source)
 end
 
 return Utils
