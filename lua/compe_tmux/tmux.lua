@@ -61,31 +61,28 @@ function Tmux.get_completion_items(self, current_pane, input)
                 local word_lower = word:lower()
 
                 if word_lower:match(input_lower) then
-                    table.insert(result, {
-                        word = word:gsub('[:.]+$', ''),
-                        kind = self.config.kind,
-                    })
+                    local clean_word = word:gsub('[:.]+$', '')
+                    result[clean_word] = {
+                        word = clean_word,
+                        label = clean_word,
+                    }
 
                     -- but also isolate the words from the result
                     for sub_word in string.gmatch(word, '[%w%d]+') do
-                        table.insert(result, {
+                        result[sub_word] = {
                             word = sub_word,
-                            kind = self.config.kind,
-                        })
+                            label = sub_word,
+                        }
                     end
                 end
             end
         end
     end
 
-    return result
+    return vim.tbl_values(result)
 end
 
 function Tmux.complete(self, input)
-    if not self:is_enabled() then
-        return nil
-    end
-
     local current_pane = self:get_current_pane()
     if not current_pane then
         return nil

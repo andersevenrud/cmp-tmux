@@ -5,41 +5,49 @@
 -- license: MIT
 --
 
-local compe = require'compe'
 local utils = require'compe_tmux.utils'
 local Tmux = require'compe_tmux.tmux'
 
-local Source = {}
+local source = {}
 
-function Source.new()
-    local self = setmetatable({}, { __index = Source })
+source.new = function()
+    local self = setmetatable({}, { __index = source })
     local config = utils.create_compe_config()
     self.tmux = Tmux.new(config)
     return self
 end
 
-function Source.get_metadata(self)
-    return {
-        priority = 100,
-        dup = 0,
-        menu = '[tmux]'
-    }
+source.get_debug_name = function()
+    return 'tmux'
 end
 
-function Source.determine(self, context)
-    return compe.helper.determine(context)
+function source:is_available()
+    return self.tmux:is_enabled()
 end
 
-function Source.complete(self, args)
-    local items = self.tmux:complete(args.input)
+function source:get_keyword_pattern()
+  return [[\w\+]]
+end
+
+function source:get_trigger_characters()
+  return { '.' }
+end
+
+function source:complete(request, callback)
+    local items = self.tmux:complete(request.context.cursor_line)
     if items == nil then
-        return args.abort()
+        return callback()
     end
 
-    args.callback({
-        incomplete = true,
-        items = items
-    })
+    callback(items)
 end
 
-return Source
+function source:resolve(completion_item, callback)
+    callback(completion_item)
+end
+
+function source:execute(completion_item, callback)
+    callback(completion_item)
+end
+
+return source
