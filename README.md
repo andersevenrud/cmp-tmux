@@ -1,8 +1,8 @@
-# compe-tmux
+# cmp-tmux
 
 Tmux completion source for [nvim-cmp](https://github.com/hrsh7th/nvim-cmp).
 
-**If you're looking for a [nvim-cmp](https://github.com/hrsh7th/nvim-cmp) version of this extension, use the [following branch](https://github.com/andersevenrud/compe-tmux/tree/cmp)** ([more information](https://github.com/andersevenrud/compe-tmux/pull/8)).
+**If you're looking for a [nvim-compe](https://github.com/hrsh7th/nvim-compe) version of this extension, use the [following branch](https://github.com/andersevenrud/compe-tmux/tree/main)** ([more information](https://github.com/andersevenrud/compe-tmux/pull/8)).
 
 *By default this extension uses adjacent panes as sources. See [configuration](#configuration)
 to enable all panes.*
