@@ -18,7 +18,7 @@ Use your package manager of choice. For example [packer.nvim](https://github.com
 ```lua
 use {
   'andersevenrud/compe-tmux',
-  branch = 'refactor/nvim-cmp'
+  branch = 'cmp'
 }
 ```
 
