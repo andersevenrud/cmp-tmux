@@ -1,6 +1,6 @@
 # compe-tmux
 
-Tmux completion source for [nvim-compe](https://github.com/hrsh7th/nvim-compe).
+Tmux completion source for [nvim-cmp](https://github.com/hrsh7th/nvim-cmp).
 
 **If you're looking for a [nvim-cmp](https://github.com/hrsh7th/nvim-cmp) version of this extension, use the [following branch](https://github.com/andersevenrud/compe-tmux/tree/cmp)** ([more information](https://github.com/andersevenrud/compe-tmux/pull/8)).
 
@@ -10,7 +10,7 @@ to enable all panes.*
 ## Requirements
 
 * [Neovim](https://github.com/neovim/neovim/)
-* [nvim-compe](https://github.com/hrsh7th/nvim-compe)
+* [nvim-cmp](https://github.com/hrsh7th/nvim-cmp)
 * [tmux](https://github.com/tmux/tmux)
 
 ## Installation
@@ -18,52 +18,34 @@ to enable all panes.*
 Use your package manager of choice. For example [packer.nvim](https://github.com/wbthomason/packer.nvim):
 
 ```vim
-use 'andersevenrud/compe-tmux'
+use 'andersevenrud/compe-tmux#refactor/nvim-cmp'
 ```
 
 ## Setup
 
-Using Lua:
-
 ```lua
-require'compe'.setup {
-  source = {
-    tmux = true,
+require'cmp'.setup {
+  sources = {
+    { name = 'tmux' }
   }
 }
-```
-
-Or Vimscript:
-
-```vim
-let g:compe.source.tmux = v:true
 ```
 
 ## Configuration
 
 To configure this extension, change the `tmux` compe source definition as defined below (defaults shown).
 
-Using Lua:
-
 ```lua
 require'compe'.setup {
-  source = {
-    tmux = {
-      disabled = false,
-      all_panes = false,
-      kind = 'Text',
+  sources = {
+    {
+      name = 'tmux',
+      opts = {
+        all_panes = false,
+      }
     }
   }
 }
-```
-
-Or using Vimscript:
-
-```vim
-let g:compe.source.tmux = {}
-let g:compe.source.tmux.disabled = v:false
-let g:compe.source.tmux.all_panes = v:false
-let g:compe.source.tmux.kind = "Text"
 ```
 
 ## License
