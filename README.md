@@ -17,8 +17,11 @@ to enable all panes.*
 
 Use your package manager of choice. For example [packer.nvim](https://github.com/wbthomason/packer.nvim):
 
-```vim
-use 'andersevenrud/compe-tmux#refactor/nvim-cmp'
+```lua
+use {
+  'andersevenrud/compe-tmux',
+  branch = 'refactor/nvim-cmp'
+}
 ```
 
 ## Setup
