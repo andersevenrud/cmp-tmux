@@ -34,7 +34,8 @@ function source:get_trigger_characters()
 end
 
 function source:complete(request, callback)
-    local items = self.tmux:complete(request.context.cursor_line)
+    local word = string.sub(request.context.cursor_before_line, request.offset)
+    local items = self.tmux:complete(word)
     if items == nil then
         return callback()
     end
