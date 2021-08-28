@@ -14,6 +14,7 @@ source.new = function()
     local self = setmetatable({}, { __index = source })
     local config = utils.create_compe_config()
     self.tmux = Tmux.new(config)
+    self.config = config
     return self
 end
 
@@ -35,7 +36,16 @@ end
 
 function source:complete(request, callback)
     local word = string.sub(request.context.cursor_before_line, request.offset)
-    local items = self.tmux:complete(word)
+    local words = self.tmux:complete(word)
+    local items = vim.tbl_map(function(word)
+        return {
+            word = word,
+            label = word,
+            labelDetails = {
+                detail = self.config.label
+            }
+        }
+    end, words)
     if items == nil then
         return callback()
     end

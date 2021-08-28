@@ -62,24 +62,18 @@ function Tmux.get_completion_items(self, current_pane, input)
 
                 if word_lower:match(input_lower) then
                     local clean_word = word:gsub('[:.]+$', '')
-                    result[clean_word] = {
-                        word = clean_word,
-                        label = clean_word,
-                    }
+                    result[clean_word] = true
 
                     -- but also isolate the words from the result
                     for sub_word in string.gmatch(word, '[%w%d]+') do
-                        result[sub_word] = {
-                            word = sub_word,
-                            label = sub_word,
-                        }
+                        result[sub_word] = true
                     end
                 end
             end
         end
     end
 
-    return vim.tbl_values(result)
+    return vim.tbl_keys(result)
 end
 
 function Tmux.complete(self, input)
