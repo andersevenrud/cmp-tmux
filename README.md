@@ -39,12 +39,13 @@ require'cmp'.setup {
 To configure this extension, add an options table (defaults shown):
 
 ```lua
-require'compe'.setup {
+require'cmp'.setup {
   sources = {
     {
       name = 'tmux',
       opts = {
         all_panes = false,
+        label = '[tmux]'
       }
     }
   }

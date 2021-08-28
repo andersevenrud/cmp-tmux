@@ -10,6 +10,7 @@ local config = require'cmp.config'
 
 local default_config = {
     all_panes = false,
+    label = '[tmux]'
 }
 
 Utils.read_command = function(cmd)
