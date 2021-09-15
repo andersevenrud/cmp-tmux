@@ -45,7 +45,9 @@ require'cmp'.setup {
       name = 'tmux',
       opts = {
         all_panes = false,
-        label = '[tmux]'
+        label = '[tmux]',
+        trigger_characters = { '.' },
+        trigger_characters_ft = {} -- { filetype = { '.' } }
       }
     }
   }

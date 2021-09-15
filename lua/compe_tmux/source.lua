@@ -31,7 +31,9 @@ function source:get_keyword_pattern()
 end
 
 function source:get_trigger_characters()
-  return { '.' }
+    local ft = vim.bo.filetype
+    local tcft = self.config.trigger_characters_ft[ft]
+    return tcft or self.config.trigger_characters
 end
 
 function source:complete(request, callback)
