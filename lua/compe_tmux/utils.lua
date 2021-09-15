@@ -29,7 +29,7 @@ end
 
 Utils.create_compe_config = function()
     local source = config.get_source_config('tmux') or {}
-    return vim.tbl_extend('force', default_config, source)
+    return vim.tbl_extend('force', default_config, source.opts)
 end
 
 return Utils
