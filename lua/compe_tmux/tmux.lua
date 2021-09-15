@@ -62,11 +62,13 @@ function Tmux.get_completion_items(self, current_pane, input)
 
                 if word_lower:match(input_lower) then
                     local clean_word = word:gsub('[:.]+$', '')
-                    result[clean_word] = true
+                    if #clean_word > 0 then
+                        result[clean_word] = true
 
-                    -- but also isolate the words from the result
-                    for sub_word in string.gmatch(word, '[%w%d]+') do
-                        result[sub_word] = true
+                        -- but also isolate the words from the result
+                        for sub_word in string.gmatch(word, '[%w%d]+') do
+                            result[sub_word] = true
+                        end
                     end
                 end
             end
