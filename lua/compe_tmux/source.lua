@@ -39,6 +39,10 @@ end
 function source:complete(request, callback)
     local word = string.sub(request.context.cursor_before_line, request.offset)
     local words = self.tmux:complete(word)
+    if words == nil then
+        return callback()
+    end
+
     local items = vim.tbl_map(function(word)
         return {
             word = word,
@@ -48,9 +52,6 @@ function source:complete(request, callback)
             }
         }
     end, words)
-    if items == nil then
-        return callback()
-    end
 
     callback(items)
 end
