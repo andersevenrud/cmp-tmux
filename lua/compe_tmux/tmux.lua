@@ -79,12 +79,16 @@ function Tmux.get_completion_items(self, current_pane, input)
 end
 
 function Tmux.complete(self, input)
-    local current_pane = self:get_current_pane()
-    if not current_pane then
-        return nil
+    if self:is_enabled() then
+        local current_pane = self:get_current_pane()
+        -- if not current_pane then
+        --     return nil
+        -- end
+
+        return self:get_completion_items(current_pane, input)
     end
 
-    return self:get_completion_items(current_pane, input)
+    return nil
 end
 
 return Tmux
