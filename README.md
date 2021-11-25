@@ -43,7 +43,7 @@ require'cmp'.setup {
   sources = {
     {
       name = 'tmux',
-      opts = {
+      option = {
         all_panes = false,
         label = '[tmux]',
         trigger_characters = { '.' },
