@@ -2,7 +2,7 @@
 
 Tmux completion source for [nvim-compe](https://github.com/hrsh7th/nvim-compe).
 
-**If you're looking for a [nvim-cmp](https://github.com/hrsh7th/nvim-cmp) version of this extension, use the [following branch](https://github.com/andersevenrud/compe-tmux/tree/cmp)** ([more information](https://github.com/andersevenrud/compe-tmux/pull/8)).
+**If you're looking for a [nvim-cmp](https://github.com/hrsh7th/nvim-cmp) version of this extension, use the [following branch](https://github.com/andersevenrud/compe-tmux/tree/main)** ([more information](https://github.com/andersevenrud/compe-tmux/pull/8)).
 
 *By default this extension uses adjacent panes as sources. See [configuration](#configuration)
 to enable all panes.*
@@ -18,7 +18,10 @@ to enable all panes.*
 Use your package manager of choice. For example [packer.nvim](https://github.com/wbthomason/packer.nvim):
 
 ```vim
-use 'andersevenrud/compe-tmux'
+use {
+  'andersevenrud/cmp-tmux',
+  branch = 'compe'
+}
 ```
 
 ## Setup
