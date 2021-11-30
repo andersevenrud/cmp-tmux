@@ -19,7 +19,7 @@ Use your package manager of choice. For example [packer.nvim](https://github.com
 
 ```lua
 use {
-  'andersevenrud/compe-tmux'
+  'andersevenrud/cmp-tmux'
 }
 ```
 
