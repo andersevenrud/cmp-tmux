@@ -5,8 +5,8 @@
 -- license: MIT
 --
 
-local utils = require'compe_tmux.utils'
-local Tmux = require'compe_tmux.tmux'
+local utils = require('compe_tmux.utils')
+local Tmux = require('compe_tmux.tmux')
 
 local source = {}
 
@@ -27,7 +27,7 @@ function source:is_available()
 end
 
 function source:get_keyword_pattern()
-  return [[\w\+]]
+    return [[\w\+]]
 end
 
 function source:get_trigger_characters()
@@ -43,13 +43,13 @@ function source:complete(request, callback)
         return callback()
     end
 
-    local items = vim.tbl_map(function(word)
+    local items = vim.tbl_map(function(w)
         return {
-            word = word,
-            label = word,
+            word = w,
+            label = w,
             labelDetails = {
-                detail = self.config.label
-            }
+                detail = self.config.label,
+            },
         }
     end, words)
 

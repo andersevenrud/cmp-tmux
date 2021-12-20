@@ -5,6 +5,6 @@
 -- license: MIT
 --
 
-local Source = require'compe_tmux.source'
+local Source = require('compe_tmux.source')
 
 return Source.new()
