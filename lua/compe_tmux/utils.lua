@@ -6,13 +6,13 @@
 --
 
 local Utils = {}
-local config = require'cmp.config'
+local config = require('cmp.config')
 
 local default_config = {
     all_panes = false,
     label = '[tmux]',
     trigger_characters = { '.' },
-    trigger_characters_ft = {}
+    trigger_characters_ft = {},
 }
 
 Utils.read_command = function(cmd)

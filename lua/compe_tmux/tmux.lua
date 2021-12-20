@@ -5,7 +5,7 @@
 -- license: MIT
 --
 
-local utils = require'compe_tmux.utils'
+local utils = require('compe_tmux.utils')
 local Tmux = {}
 
 function Tmux.new(config)
@@ -27,7 +27,7 @@ end
 function Tmux.get_panes(self, current_pane)
     local result = {}
 
-    local cmd = 'tmux list-panes -F \'#{pane_id}\''
+    local cmd = "tmux list-panes -F '#{pane_id}'"
     if self.config.all_panes then
         cmd = cmd .. ' -a'
     end
