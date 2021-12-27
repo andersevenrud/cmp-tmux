@@ -5,7 +5,6 @@
 -- license: MIT
 --
 
-local utils = require('cmp_tmux.utils')
 local Tmux = {}
 
 function Tmux.new(config)
@@ -32,63 +31,86 @@ function Tmux.get_panes(self, current_pane)
         cmd = cmd .. ' -a'
     end
 
-    local data = utils.read_command(cmd)
-    if data ~= nil then
-        for p in string.gmatch(data, '%%%d+') do
-            if current_pane ~= p then
-                table.insert(result, p)
+    local handle = io.popen(cmd)
+    if handle ~= nil then
+        local data = handle:read('*all')
+        if data ~= nil then
+            for p in string.gmatch(data, '%%%d+') do
+                if current_pane ~= p then
+                    table.insert(result, p)
+                end
             end
         end
+
+        handle:close()
     end
 
     return result
 end
 
-function Tmux.get_pane_data(self, pane)
-    return utils.read_command('tmux capture-pane -p -t ' .. pane)
+function Tmux.create_pane_data_job(self, pane, on_data, on_exit)
+    local cmd = { 'tmux', 'capture-pane', '-p', '-t', pane }
+
+    return vim.fn.jobstart(cmd, {
+        on_exit = on_exit,
+        on_stderr = nil,
+        on_stdout = function(_, data)
+            local result = table.concat(data, '\n')
+            if #result > 0 then
+                on_data(result)
+            end
+        end,
+    })
 end
 
-function Tmux.get_completion_items(self, current_pane, input)
+function Tmux.get_completion_items(self, current_pane, input, callback)
     local panes = self:get_panes(current_pane)
-    local result = {}
     local input_lower = input:lower()
+    local remainder = #panes
+    local result = {}
+
+    if remainder == 0 then
+        return callback(nil)
+    end
 
     for _, p in ipairs(panes) do
-        local data = self:get_pane_data(p)
-        if data ~= nil then
-            -- match not only full words, but urls, paths, etc.
-            for word in string.gmatch(data, '[%w%d_:/.%-~]+') do
-                local word_lower = word:lower()
+        self:create_pane_data_job(p, function(data)
+            if data ~= nil then
+                -- match not only full words, but urls, paths, etc.
+                for word in string.gmatch(data, '[%w%d_:/.%-~]+') do
+                    local word_lower = word:lower()
 
-                if word_lower:match(input_lower) then
-                    local clean_word = word:gsub('[:.]+$', '')
-                    if #clean_word > 0 then
-                        result[clean_word] = true
+                    if word_lower:match(input_lower) then
+                        local clean_word = word:gsub('[:.]+$', '')
+                        if #clean_word > 0 then
+                            result[clean_word] = true
 
-                        -- but also isolate the words from the result
-                        for sub_word in string.gmatch(word, '[%w%d]+') do
-                            result[sub_word] = true
+                            -- but also isolate the words from the result
+                            for sub_word in string.gmatch(word, '[%w%d]+') do
+                                result[sub_word] = true
+                            end
                         end
                     end
                 end
             end
-        end
-    end
+        end, function()
+            remainder = remainder - 1
 
-    return vim.tbl_keys(result)
+            if remainder == 0 then
+                callback(vim.tbl_keys(result))
+            end
+        end)
+    end
 end
 
-function Tmux.complete(self, input)
+function Tmux.complete(self, input, callback)
     if self:is_enabled() then
         local current_pane = self:get_current_pane()
-        -- if not current_pane then
-        --     return nil
-        -- end
 
-        return self:get_completion_items(current_pane, input)
+        return self:get_completion_items(current_pane, input, callback)
     end
 
-    return nil
+    return callback(nil)
 end
 
 return Tmux
