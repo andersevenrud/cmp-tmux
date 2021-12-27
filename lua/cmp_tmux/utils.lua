@@ -15,20 +15,6 @@ local default_config = {
     trigger_characters_ft = {},
 }
 
-Utils.read_command = function(cmd)
-    local h = io.popen(cmd)
-
-    if h ~= nil then
-        local data = h:read('*all')
-
-        h:close()
-
-        return data
-    end
-
-    return nil
-end
-
 Utils.create_compe_config = function()
     local source = config.get_source_config('tmux') or {}
     return vim.tbl_extend('force', default_config, source.option or {})

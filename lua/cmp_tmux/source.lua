@@ -38,22 +38,24 @@ end
 
 function source:complete(request, callback)
     local word = string.sub(request.context.cursor_before_line, request.offset)
-    local words = self.tmux:complete(word)
-    if words == nil then
-        return callback()
-    end
 
-    local items = vim.tbl_map(function(w)
-        return {
-            word = w,
-            label = w,
-            labelDetails = {
-                detail = self.config.label,
-            },
-        }
-    end, words)
+    self.tmux:complete(word, function(words)
+        if words == nil then
+            return callback()
+        end
 
-    callback(items)
+        local items = vim.tbl_map(function(w)
+            return {
+                word = w,
+                label = w,
+                labelDetails = {
+                    detail = self.config.label,
+                },
+            }
+        end, words)
+
+        callback(items)
+    end)
 end
 
 function source:resolve(completion_item, callback)
