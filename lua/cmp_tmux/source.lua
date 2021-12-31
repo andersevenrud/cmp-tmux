@@ -24,8 +24,8 @@ end
 
 source.new = function()
     local self = setmetatable({}, { __index = source })
-    self.tmux = Tmux.new(config)
     self.config = create_config()
+    self.tmux = Tmux.new(self.config)
     return self
 end
 
