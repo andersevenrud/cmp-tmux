@@ -5,16 +5,27 @@
 -- license: MIT
 --
 
-local utils = require('cmp_tmux.utils')
+local config = require('cmp.config')
 local Tmux = require('cmp_tmux.tmux')
 
 local source = {}
 
+local default_config = {
+    all_panes = false,
+    label = '[tmux]',
+    trigger_characters = { '.' },
+    trigger_characters_ft = {},
+}
+
+local function create_config()
+    local source_config = config.get_source_config('tmux') or {}
+    return vim.tbl_extend('force', default_config, source_config.option or {})
+end
+
 source.new = function()
     local self = setmetatable({}, { __index = source })
-    local config = utils.create_compe_config()
     self.tmux = Tmux.new(config)
-    self.config = config
+    self.config = create_config()
     return self
 end
 
