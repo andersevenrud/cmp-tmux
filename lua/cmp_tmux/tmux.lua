@@ -1,11 +1,11 @@
 --
--- compe-tmux
--- url: https://github.com/andersevenrud/compe-tmux
+-- cmp-tmux
+-- url: https://github.com/andersevenrud/cmp-tmux
 -- author: Anders Evenrud <andersevenrud@gmail.com>
 -- license: MIT
 --
 
-local utils = require('compe_tmux.utils')
+local utils = require('cmp_tmux.utils')
 local Tmux = {}
 
 function Tmux.new(config)
