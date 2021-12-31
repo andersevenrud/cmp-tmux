@@ -1,6 +1,6 @@
 --
--- compe-tmux
--- url: https://github.com/andersevenrud/compe-tmux
+-- cmp-tmux
+-- url: https://github.com/andersevenrud/cmp-tmux
 -- author: Anders Evenrud <andersevenrud@gmail.com>
 -- license: MIT
 --
