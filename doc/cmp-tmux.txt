@@ -1,0 +1,69 @@
+*cmp-tmux*
+
+Tmux completion source for nvim-cmp (https://github.com/hrsh7th/nvim-cmp).
+
+By default this extension uses adjacent panes as sources. See configuration
+to enable all panes.
+
+================================================================================
+CONTENTS                                                       *cmp-tmux-contents*
+
+1. cmp-tmux.............................................................|cmp-tmux|
+    1.1. Requirements......................................|cmp-tmux-requirements|
+    1.2. Installation......................................|cmp-tmux-installation|
+    1.3. Setup....................................................|cmp-tmux-setup|
+    1.4. Configuration....................................|cmp-tmux-configuration|
+    1.5. License................................................|cmp-tmux-license|
+
+--------------------------------------------------------------------------------
+REQUIREMENTS                                               *cmp-tmux-requirements*
+
+*   Neovim (https://github.com/neovim/neovim/)
+*   nvim-cmp (https://github.com/hrsh7th/nvim-cmp)
+*   tmux (https://github.com/tmux/tmux)
+
+--------------------------------------------------------------------------------
+INSTALLATION                                               *cmp-tmux-installation*
+
+Use your package manager of choice. For example packer.nvim:
+>
+    use {
+      'andersevenrud/cmp-tmux'
+    }
+<
+
+--------------------------------------------------------------------------------
+SETUP                                                             *cmp-tmux-setup*
+>
+    require'cmp'.setup {
+      sources = {
+        { name = 'tmux' }
+      }
+    }
+<
+
+--------------------------------------------------------------------------------
+CONFIGURATION                                             *cmp-tmux-configuration*
+
+To configure this extension, add an options table (defaults shown):
+>
+    require'cmp'.setup {
+      sources = {
+        {
+          name = 'tmux',
+          option = {
+            all_panes = false,
+            label = '[tmux]',
+            trigger_characters = { '.' },
+            trigger_characters_ft = {} -- { filetype = { '.' } }
+          }
+        }
+      }
+    }
+<
+
+--------------------------------------------------------------------------------
+LICENSE                                                         *cmp-tmux-license*
+
+MIT
+
