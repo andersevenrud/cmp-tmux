@@ -26,11 +26,11 @@ use {
 ## Setup
 
 ```lua
-require'cmp'.setup {
+require('cmp').setup({
   sources = {
     { name = 'tmux' }
   }
-}
+})
 ```
 
 ## Configuration
@@ -38,7 +38,7 @@ require'cmp'.setup {
 To configure this extension, add an options table (defaults shown):
 
 ```lua
-require'cmp'.setup {
+require('cmp').setup({
   sources = {
     {
       name = 'tmux',
@@ -50,7 +50,7 @@ require'cmp'.setup {
       }
     }
   }
-}
+})
 ```
 
 ## License
