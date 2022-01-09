@@ -106,11 +106,10 @@ end
 function Tmux.complete(self, input, callback)
     if self:is_enabled() then
         local current_pane = self:get_current_pane()
-
-        return self:get_completion_items(current_pane, input, callback)
+        self:get_completion_items(current_pane, input, callback)
+    else
+        callback(nil)
     end
-
-    return callback(nil)
 end
 
 return Tmux
