@@ -4,8 +4,9 @@
 -- author: Anders Evenrud <andersevenrud@gmail.com>
 -- license: MIT
 --
-
-local Tmux = {}
+local Tmux = {
+  Panes = { ALL='all', CURRENT='current', SESSION='session' },
+}
 
 function Tmux.new(config)
     local self = setmetatable({}, { __index = Tmux })
@@ -27,8 +28,10 @@ function Tmux.get_panes(self, current_pane)
     local result = {}
 
     local cmd = "tmux list-panes -F '#{pane_id}'"
-    if self.config.all_panes then
+    if self.config.panes == self.Panes.ALL then
         cmd = cmd .. ' -a'
+    elseif self.config.panes == self.Panes.SESSION then
+        cmd = cmd .. ' -s'
     end
 
     local handle = io.popen(cmd)

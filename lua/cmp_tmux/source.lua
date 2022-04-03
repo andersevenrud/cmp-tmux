@@ -11,7 +11,7 @@ local Tmux = require('cmp_tmux.tmux')
 local source = {}
 
 local default_config = {
-    all_panes = false,
+    panes = Tmux.Panes.CURRENT,
     label = '[tmux]',
     trigger_characters = { '.' },
     trigger_characters_ft = {},
