@@ -5,7 +5,7 @@
 -- license: MIT
 --
 local Tmux = {
-  Panes = { ALL='all', CURRENT='current', SESSION='session' },
+  Panes = { ALL='all', SESSION='session', WINDOW='window', },
 }
 
 function Tmux.new(config)

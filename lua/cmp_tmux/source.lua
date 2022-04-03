@@ -11,7 +11,7 @@ local Tmux = require('cmp_tmux.tmux')
 local source = {}
 
 local default_config = {
-    panes = Tmux.Panes.CURRENT,
+    panes = Tmux.Panes.WINDOW,
     label = '[tmux]',
     trigger_characters = { '.' },
     trigger_characters_ft = {},
@@ -43,8 +43,8 @@ end
 
 function source:get_trigger_characters()
     local ft = vim.bo.filetype
-    local tcft = self.config.trigger_characters_ft[ft]
-    return tcft or self.config.trigger_characters
+    local tcft = (self.config.trigger_characters_ft or {})[ft]
+    return tcft or self.config.trigger_characters or {}
 end
 
 function source:complete(request, callback)
@@ -78,3 +78,4 @@ function source:execute(completion_item, callback)
 end
 
 return source
+
