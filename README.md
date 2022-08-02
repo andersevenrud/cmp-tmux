@@ -4,8 +4,10 @@ Tmux completion source for [nvim-cmp](https://github.com/hrsh7th/nvim-cmp).
 
 **If you're looking for a [nvim-compe](https://github.com/hrsh7th/nvim-compe) version of this extension, use the [following branch](https://github.com/andersevenrud/compe-tmux/tree/compe)**.
 
-*By default this extension uses adjacent panes as sources. See [configuration](#configuration)
-to enable all panes.*
+> This extension [pulls text from your current tmux session](https://github.com/andersevenrud/cmp-tmux/issues/14#issuecomment-924877836)
+> and provides it as a completion source.
+>
+> *By default this extension uses adjacent panes as sources. See [configuration](#configuration) to enable all panes.*
 
 ## Requirements
 
