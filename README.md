@@ -45,10 +45,21 @@ require('cmp').setup({
     {
       name = 'tmux',
       option = {
+        -- Source from all panes in session instead of adjacent panes
         all_panes = false,
+
+        -- Completion popup label
         label = '[tmux]',
+
+        -- Trigger character
         trigger_characters = { '.' },
-        trigger_characters_ft = {} -- { filetype = { '.' } }
+
+        -- Specify trigger characters for filetype(s)
+        -- { filetype = { '.' } }
+        trigger_characters_ft = {},
+
+        -- Keyword patch mattern
+        keyword_pattern = [[\w\+]],
       }
     }
   }
