@@ -45,7 +45,7 @@ require('cmp').setup({
     {
       name = 'tmux',
       option = {
-        all_panes = false,
+        panes = 'window', -- 'window' | 'session' | 'all'
         label = '[tmux]',
         trigger_characters = { '.' },
         trigger_characters_ft = {} -- { filetype = { '.' } }
