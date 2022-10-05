@@ -15,6 +15,7 @@ local default_config = {
     label = '[tmux]',
     trigger_characters = { '.' },
     trigger_characters_ft = {},
+    keyword_pattern = [[\w\+]],
 }
 
 local function create_config()
@@ -38,7 +39,7 @@ function source:is_available()
 end
 
 function source:get_keyword_pattern()
-    return [[\w\+]]
+    return self.config.keyword_pattern
 end
 
 function source:get_trigger_characters()
