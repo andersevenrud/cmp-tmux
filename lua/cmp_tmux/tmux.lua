@@ -49,7 +49,10 @@ function Tmux.get_panes(self, current_pane)
 end
 
 function Tmux.create_pane_data_job(self, pane, on_data, on_exit)
-    local cmd = { 'tmux', 'capture-pane', '-p', '-t', pane, '-S', self.config.history_limit }
+    local cmd = { 'tmux', 'capture-pane', '-p', '-t', pane }
+    if self.config.capture_history then
+        cmd:append('-S -')
+    end
 
     return vim.fn.jobstart(cmd, {
         on_exit = on_exit,
