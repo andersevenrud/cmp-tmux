@@ -16,6 +16,7 @@ local default_config = {
     trigger_characters = { '.' },
     trigger_characters_ft = {},
     keyword_pattern = [[\w\+]],
+    history_limit = '0',
 }
 
 local function create_config()
@@ -40,6 +41,10 @@ end
 
 function source:get_keyword_pattern()
     return self.config.keyword_pattern
+end
+
+function source:get_history_limit()
+    return self.config.history_limit
 end
 
 function source:get_trigger_characters()
