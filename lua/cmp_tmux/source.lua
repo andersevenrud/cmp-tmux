@@ -16,6 +16,7 @@ local default_config = {
     trigger_characters = { '.' },
     trigger_characters_ft = {},
     keyword_pattern = [[\w\+]],
+    capture_history = false,
 }
 
 local function create_config()

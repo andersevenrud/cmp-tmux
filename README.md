@@ -60,6 +60,12 @@ require('cmp').setup({
 
         -- Keyword patch mattern
         keyword_pattern = [[\w\+]],
+
+        -- Capture full pane history
+        -- `false`: show completion suggestion from text in the visible pane (default)
+        -- `true`: show completion suggestion from text starting from the beginning of the pane history.
+        --         This works by passing `-S -` flag to `tmux capture-pane` command. See `man tmux` for details.
+        capture_history = false,
       }
     }
   }
