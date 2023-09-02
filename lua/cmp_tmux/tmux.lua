@@ -51,7 +51,7 @@ end
 function Tmux.create_pane_data_job(self, pane, on_data, on_exit)
     local cmd = { 'tmux', 'capture-pane', '-p', '-t', pane }
     if self.config.capture_history then
-        cmd = table.insert(cmd, ' -S -')
+        table.insert(cmd, ' -S -')
     end
 
     return vim.fn.jobstart(cmd, {
