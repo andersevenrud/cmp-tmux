@@ -55,7 +55,8 @@ To configure this extension, add an options table (defaults shown):
             all_panes = false,
             label = '[tmux]',
             trigger_characters = { '.' },
-            trigger_characters_ft = {} -- { filetype = { '.' } }
+            trigger_characters_ft = {}, -- { filetype = { '.' } },
+            capture_history = false,
           }
         }
       }
