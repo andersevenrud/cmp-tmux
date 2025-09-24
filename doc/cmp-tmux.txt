@@ -52,7 +52,7 @@ To configure this extension, add an options table (defaults shown):
         {
           name = 'tmux',
           option = {
-            all_panes = false,
+            scope = 'window',
             label = '[tmux]',
             trigger_characters = { '.' },
             trigger_characters_ft = {}, -- { filetype = { '.' } },
