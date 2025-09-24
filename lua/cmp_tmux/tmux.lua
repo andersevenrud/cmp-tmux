@@ -27,7 +27,9 @@ function Tmux.get_panes(self, current_pane)
     local result = {}
 
     local cmd = "tmux list-panes -F '#{pane_id}'"
-    if self.config.all_panes then
+    if self.config.scope == 'session' then
+        cmd = cmd .. ' -s'
+    elseif self.config.scope == 'all' then
         cmd = cmd .. ' -a'
     end
 
