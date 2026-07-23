@@ -9,6 +9,9 @@ Tmux completion source for [nvim-cmp](https://github.com/hrsh7th/nvim-cmp).
 >
 > *By default this extension uses adjacent panes as sources. See [configuration](#configuration) to enable all panes.*
 
+> [!TIP]
+> Looking for a [blink.cmp](https://github.com/Saghen/blink.cmp) alternative ? See [blink-cmp-tmux](https://github.com/mgalliou/blink-cmp-tmux)
+
 ## Requirements
 
 * [Neovim](https://github.com/neovim/neovim/)
